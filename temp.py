@@ -62,46 +62,32 @@ if __name__ == "__main__":
     cipher = ""
     previousCipher = ""
     auxPadding = ""
-    qualquer = ""
+    salvo = ""
     letra = list(range(16))
     for i in range(16):
         letra[i] = (str(hex(0))[2:]).zfill(2)
         #print letra[i]
 
     for king in range(1, 4):
-
+        cipher = ""
+        previousCipher = ""
+        auxPadding = ""
         for i in range((blockIndex-1)*16, (blockIndex*16)):
             previousCipher += cypherText[i]
         for i in range(blockIndex*16, (blockIndex+1)*16):
             cipher += cypherText[i]
-
-        #print previousCipher.encode("hex")
-        #print cipher.encode("hex")
-
 
         for f in range(1, 17):
             auxPadding = returnPadding(f)
             #print auxPadding
 
             for k in range(2, 256):
-                #i_temp = str(i)
-                #print i
-                #print (str(hex(i))[2:]).zfill(2)                 
-                #print letra
-                #letra = (("0x000000000000000000000000000000" + (str(hex(k))[2:]).zfill(2))[2:])
                 letra[16-f] =  (str(hex(k))[2:]).zfill(2)
                 print letra
                 auxLetra = ""
                 for conc in range(16):
                     auxLetra = auxLetra + letra[conc]
-                #print auxLetra
-                #qualquer = >>(str(hex(k))[2:]).zfill(2))[2:])
-                #print letra
-                #print aux.encode("hex")
-                #print auxPlainText
-                #print len(letra)
-                #print len(aux)
-                #print len(auxPlainText)
+
                 temp = strxor(previousCipher, auxPadding.decode("hex"), auxLetra.decode("hex"))
                 #print temp.encode("hex")
 
@@ -113,36 +99,9 @@ if __name__ == "__main__":
                     letra[16-f] = (str(hex(k))[2:]).zfill(2)      # Issue HTTP query with the given argument
                     #print letra[f]
                     break
+        auxLetra = ""
+        for conc2 in range(16):
+            auxLetra = auxLetra + letra[conc2]
+        salvo = auxLetra + salvo
+        print salvo
         blockIndex = blockIndex -1
-
-
-#print type(temp[i])
-#print hex(temp[i])
-
-
-#print "OK"
-
-    #cypheText[] = int("",16)
-    #cypheText =  str(hex(cypherText))
-    #for i in range(256):
-    #    cypherText[63] = (str(hex(i))[2:]).zfill(2)
-    #    cypherTextSTR = ""
-    #    for j in range(64):
-    #        cypherTextSTR += cypherText[j]
-
-    #    po = PaddingOracle()
-    #    po.query(cypherTextSTR)       # Issue HTTP query with the given argument
-        #print cypherTextSTR
-        ##print i
-
-
-
-
-
-    #print type(cypherText)
-    #a = int("0x1a",16)
-    #print hex(a)
-    #print a
-
-    #po = PaddingOracle()
-    #po.query()       # Issue HTTP query with the given argument
