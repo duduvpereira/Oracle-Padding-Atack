@@ -2,6 +2,7 @@ from distutils.command.build_scripts import first_line_re
 import urllib2
 import sys
 import codecs
+import time
 #import numpy as np
 
 TARGET = 'http://crypto-class.appspot.com/po?er='
@@ -17,7 +18,7 @@ class PaddingOracle(object):
         except urllib2.HTTPError, e:
             #print "We got: %d" % e.code       # Print response code
             if e.code == 404:
-                print "OK caralho"
+                print "OK"
                 return True # good padding
 
             return False # bad padding
@@ -44,7 +45,7 @@ def returnPadding(index):
 
 
 if __name__ == "__main__":
-
+    start_time = time.time()
     FirstCipher = "f20bdba6ff29eed7b046d1df9fb7000058b1ffb4210a580f748b4ac714c001bd4a61044426fb515dad3f21f18aa577c0bdf302936266926ff37dbf7035d5eeb4".decode("hex")
 
     #print len(FirstCipher)
@@ -55,9 +56,7 @@ if __name__ == "__main__":
 
     for i in range(64):
         cypherText[i] = FirstCipher[i]
-        #print cypherText[i].encode("hex")
-        #cypherText[i] = cypherText[i].encode("hex")
-    #print cypherText
+        
     blockIndex = 3
     cipher = ""
     previousCipher = ""
@@ -105,3 +104,4 @@ if __name__ == "__main__":
         salvo = auxLetra + salvo
         print salvo
         blockIndex = blockIndex -1
+    print("--- %s seconds ---" % (time.time() - start_time))
